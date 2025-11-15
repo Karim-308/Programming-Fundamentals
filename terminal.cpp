@@ -35,7 +35,7 @@ void setColor(TerminalColor color){
             case COLOR_YELLOW: winColor = FOREGROUND_RED | FOREGROUND_GREEN; break;
             case COLOR_CYAN:   winColor = FOREGROUND_GREEN | FOREGROUND_BLUE; break;
             case COLOR_WHITE:  winColor = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE; break;
-            default   winColor = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE; break;}
+            default:   winColor = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE; break;}
         SetConsoleTextAttribute(hConsole,winColor);
 
     #else
