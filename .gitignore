@@ -1,0 +1,17 @@
+# Compiled binaries
+*.o
+*.exe
+main
+bin/
+obj/
+output/
+
+# Code::Blocks files
+*.layout
+*.depend
+
+# VSCode settings (optional - remove if you want to keep them)
+.vscode/
+
+# Old C file (we use .cpp now)
+terminal.c
