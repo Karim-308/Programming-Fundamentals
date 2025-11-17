@@ -1,9 +1,9 @@
 #ifndef TERIMNAL_H_INCLUDED
 #define TERIMNAL_H_INCLUDED
 
-    #ifdef _WIN32
+#ifdef _WIN32
 #include<Windows.h>
-    #endif
+#endif
 
 
 typedef enum  {
