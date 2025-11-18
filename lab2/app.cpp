@@ -6,6 +6,8 @@
 #ifdef __linux__
 #include <termios.h>
 #include <unistd.h>
+#elif defined(_WIN32)
+#include <conio.h>
 #endif
 
 
@@ -76,12 +78,42 @@ Key readLinuxKey() {
 }
 #endif
 
+#ifdef _WIN32
+Key readWindowsKey() {
+    if (!_kbhit())
+        return KEY_NONE;
+
+    int c = _getch();
+
+    // Arrow keys and other control keys are reported as two-step codes
+    if (c == 0 || c == 224) {
+        int code = _getch();
+        switch (code) {
+            case 72: return KEY_UP;
+            case 80: return KEY_DOWN;
+            case 75: return KEY_LEFT;
+            case 77: return KEY_RIGHT;
+            case 71: return KEY_HOME;
+            case 79: return KEY_END;
+            default: return KEY_OTHER;
+        }
+    }
+
+    if (c == 27)
+        return KEY_ESC;
+
+    return KEY_OTHER;
+}
+#endif
+
 
 
 Key getKey() {
 #ifdef __linux__
     static RawMode raw;   // enabling raw mode once
     return readLinuxKey();
+#elif defined(_WIN32)
+    return readWindowsKey();
 #else
     return KEY_NONE;
 #endif

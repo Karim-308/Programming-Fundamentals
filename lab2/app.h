@@ -16,6 +16,7 @@ enum Key {
 };
 
 Key readLinuxKey();
+Key readWindowsKey();
 Key getKey();
 
 
