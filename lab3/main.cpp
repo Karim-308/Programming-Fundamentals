@@ -8,8 +8,8 @@ int main() {
     int size;
     cin >> size;
 
-    if (size <= 0 || size % 2 == 0) {
-        cout << "Invalid size. Please enter an odd size and higher than zero" << endl;
+    if (size <= 0 || size % 2 == 0 || !cin) {
+        cout << "Invalid size. Size must be an odd integer higher than zero" << endl;
         return 1;
     }
 
