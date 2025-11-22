@@ -11,6 +11,16 @@ using namespace std;
 static Employee* employees = NULL;
 static int employeeCount = 0;
 
+static bool hasDigits(const string* value) {
+    if (value == nullptr)
+        return false;
+    for (char c : *value) {
+        if (c >= '0' && c <= '9')
+            return true;
+    }
+    return false;
+}
+
 #ifdef __linux__
 #include <termios.h>
 #include <unistd.h>
@@ -177,7 +187,7 @@ static void screenPlaceholder(const char* title) {
     goToXY(20, 5);
     cout << title;
     goToXY(20, 7);
-    cout << "Feature coming soon.";
+    cout << " to be done ";
     goToXY(20, 9);
     cout << "Press <- or Home to return...";
     waitForReturn();
@@ -296,20 +306,27 @@ void screenNew() {
         goToXY(20, 5);
         cout << "New Employee";
         Employee emp = {};
+        bool containsDigits = false;
         do {
             goToXY(20, 7);
             cout << "Name: ";
             getline(cin, emp.name);
+            containsDigits = hasDigits(&emp.name);
             if (emp.name.empty()) {
                 goToXY(20, 8);
                 cout << "Name cannot be empty.                     ";
+                goToXY(20, 7);
+                cout << "                                           ";
+            } else if (containsDigits) {
+                goToXY(20, 8);
+                cout << "Name cannot contain numbers.              ";
                 goToXY(20, 7);
                 cout << "                                           ";
             } else {
                 goToXY(20, 8);
                 cout << "                                           ";
             }
-        } while (emp.name.empty());
+        } while (emp.name.empty() || containsDigits);
 
         goToXY(20, 9);
         cout << "Salary: ";

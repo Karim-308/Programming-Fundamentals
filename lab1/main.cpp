@@ -40,7 +40,7 @@ void drawBox(int x, int y, int width, int height, TerminalColor color) {
 
     
     goToXY(x + (width - 8) / 2, y + height / 2);
-    cout<< "Hi There!";
+    cout<< "Hi Eng. Mina!";
 
     resetColor();
 }
