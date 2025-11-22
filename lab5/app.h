@@ -1,8 +1,6 @@
 #ifndef APP_H
 #define APP_H
 
-#include <string>
-
 enum Key {
     KEY_NONE,
     KEY_UP,
@@ -15,25 +13,20 @@ enum Key {
     KEY_OTHER
 };
 
-Key readLinuxKey();
-Key readWindowsKey();
-Key getKey();
-
-
 enum MenuItem {
     MENU_NEW = 0,
     MENU_DISPLAY = 1,
-    MENU_EXIT = 2
+    MENU_SWAP = 2,
+    MENU_2D = 3,
+    MENU_EXIT = 4
 };
 
-void drawButton(int y, std::string label , bool selected);
+Key getKey();
 void drawMenu(MenuItem current);
-
-
-void showSubScreen(const char* title);
-
 void screenNew();
 void screenDisplay();
+void screenSwap();
+void screen2D();
 void exitScreen();
 
 #endif

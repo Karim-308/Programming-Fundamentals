@@ -119,7 +119,7 @@ Key getKey() {
 #endif
 }
 
-void drawButton(int y, const std::string& label , bool selected){
+void drawButton(int y, std::string label , bool selected){
 
     goToXY(20, y);
 
