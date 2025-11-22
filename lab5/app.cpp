@@ -58,10 +58,13 @@ static void disableRawInput() {
 }
 
 static bool addEmployee(Employee* emp) {
-    Employee* grown = (Employee*)realloc(employees, (employeeCount + 1) * sizeof(Employee));
-    if (grown == NULL)
-        return false;
-    employees = grown;
+
+    if (employeeCount%10 ==0) {
+        Employee* resized = (Employee*)realloc(employees, (employeeCount + 10) * sizeof(Employee));
+        if (resized == NULL)
+            return false;
+        employees = resized;
+    }
     employees[employeeCount] = *emp;
     employeeCount++;
     return true;
@@ -213,31 +216,37 @@ void screenSwap() {
     while (true) {
         goToXY(20, 7);
         cout << "Enter value for A: ";
-        if (cin >> a)
+        if (cin >> a) {
+            goToXY(20, 8);
+            cout << "                                           ";
             break;
+        }
         cin.clear();
         cin.ignore(1000, '\n');
         goToXY(20, 8);
-        cout << "Invalid integer, please try again.      ";
+        cout << "Enter a valid integer.                    ";
+        goToXY(20, 7);
+        cout << "                                           ";
     }
     cin.ignore(1000, '\n');
-    goToXY(20, 8);
-    cout << "                                           ";
 
     int b;
     while (true) {
         goToXY(20, 9);
         cout << "Enter value for B: ";
-        if (cin >> b)
+        if (cin >> b) {
+            goToXY(20, 10);
+            cout << "                                           ";
             break;
+        }
         cin.clear();
         cin.ignore(1000, '\n');
         goToXY(20, 10);
-        cout << "Invalid integer, please try again.      ";
+        cout << "Enter a valid integer.                    ";
+        goToXY(20, 9);
+        cout << "                                           ";
     }
     cin.ignore(1000, '\n');
-    goToXY(20, 10);
-    cout << "                                           ";
 
     int y = 12;
 
