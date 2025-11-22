@@ -1,7 +1,7 @@
 #include "app.h"
 #include <iostream>
-#include <cstring>
-#include <cstdlib>
+#include <stdlib.h>
+#include <string>
 #include "../lab1/terminal.h"
 #include "employee.h"
 #include "swap.h"
@@ -69,9 +69,6 @@ static bool addEmployee(Employee* emp) {
 
 static void clearEmployees() {
     if (employees != NULL) {
-        for (int i = 0; i < employeeCount; ++i) {
-            free(employees[i].name);
-        }
         free(employees);
     }
     employees = NULL;
@@ -79,16 +76,26 @@ static void clearEmployees() {
 }
 
 #ifdef __linux__
-static Key readLinuxKey() {
+Key readLinuxKey() {
     unsigned char c;
+
+    
     if (read(STDIN_FILENO, &c, 1) != 1)
         return KEY_NONE;
+
+    // 27 is ESC
     if (c == 27) {
+        
         unsigned char seq[2];
+
+        // If no more bytes then input is an ESC
         if (read(STDIN_FILENO, &seq[0], 1) != 1)
             return KEY_ESC;
+
         if (read(STDIN_FILENO, &seq[1], 1) != 1)
-            return KEY_ESC;
+            return KEY_ESC; 
+
+        // If there is 2 bytes then the format is  ESC [ X
         if (seq[0] == '[') {
             switch (seq[1]) {
                 case 'A': return KEY_UP;
@@ -100,8 +107,10 @@ static Key readLinuxKey() {
                 default: return KEY_OTHER;
             }
         }
+
         return KEY_OTHER;
     }
+
     return KEY_OTHER;
 }
 #endif
@@ -183,7 +192,7 @@ void screenDisplay() {
     } else {
         for (int i = 0; i < employeeCount; ++i) {
             goToXY(20, y);
-            cout << i + 1 << ". " << (employees[i].name ? employees[i].name : "Unknown");
+            cout << i + 1 << ". " << employees[i].name;
             goToXY(20, y + 1);
             cout << "Salary: " << employees[i].salary << " Age: " << employees[i].age << " Gender: " << employees[i].gender;
             y += 3;
@@ -272,35 +281,41 @@ void screen2D() {
 
 void screenNew() {
     disableRawInput();
-    while (true) {
+    bool keepAdding = true;
+    while (keepAdding) {
         clearScreen();
         goToXY(20, 5);
         cout << "New Employee";
-        Employee emp;
-        emp.name = NULL;
-        char tempName[64];
-        goToXY(20, 7);
-        cout << "Name: ";
-        cin.getline(tempName, sizeof(tempName));
-        while (tempName[0] == '\0') {
+        Employee emp = {};
+        do {
             goToXY(20, 7);
             cout << "Name: ";
-            cin.getline(tempName, sizeof(tempName));
-        }
-        size_t len = strlen(tempName);
-        emp.name = (char*)malloc(len + 1);
-        if (emp.name == NULL)
-            break;
-        strcpy(emp.name, tempName);
+            getline(cin, emp.name);
+            if (emp.name.empty()) {
+                goToXY(20, 8);
+                cout << "Name cannot be empty.                     ";
+                goToXY(20, 7);
+                cout << "                                           ";
+            } else {
+                goToXY(20, 8);
+                cout << "                                           ";
+            }
+        } while (emp.name.empty());
 
         goToXY(20, 9);
         cout << "Salary: ";
         while (!(cin >> emp.salary) || emp.salary < 0) {
             cin.clear();
             cin.ignore(1000, '\n');
+            goToXY(20, 10);
+            cout << "Enter a non-negative number.               ";
+            goToXY(20, 9);
+            cout << "                                           ";
             goToXY(20, 9);
             cout << "Salary: ";
         }
+        goToXY(20, 10);
+        cout << "                                           ";
         cin.ignore(1000, '\n');
 
         goToXY(20, 11);
@@ -308,9 +323,15 @@ void screenNew() {
         while (!(cin >> emp.age) || emp.age <= 0) {
             cin.clear();
             cin.ignore(1000, '\n');
+            goToXY(20, 12);
+            cout << "Enter a positive age.                      ";
+            goToXY(20, 11);
+            cout << "                                           ";
             goToXY(20, 11);
             cout << "Age: ";
         }
+        goToXY(20, 12);
+        cout << "                                           ";
         cin.ignore(1000, '\n');
 
         goToXY(20, 13);
@@ -318,14 +339,20 @@ void screenNew() {
         while (!(cin >> emp.gender) || (emp.gender != 'm' && emp.gender != 'M' && emp.gender != 'f' && emp.gender != 'F')) {
             cin.clear();
             cin.ignore(1000, '\n');
+            goToXY(20, 14);
+            cout << "Enter M or F.                              ";
+            goToXY(20, 13);
+            cout << "                                           ";
             goToXY(20, 13);
             cout << "Gender (M/F): ";
         }
+        goToXY(20, 14);
+        cout << "                                           ";
         cin.ignore(1000, '\n');
 
         if (!addEmployee(&emp)) {
-            free(emp.name);
-            break;
+            keepAdding = false;
+            continue;
         }
         goToXY(20, 15);
         cout << "Employees: " << employeeCount;
@@ -340,7 +367,7 @@ void screenNew() {
         }
         cin.ignore(1000, '\n');
         if (choice == 'n' || choice == 'N')
-            break;
+            keepAdding = false;
     }
     enableRawInput();
 }

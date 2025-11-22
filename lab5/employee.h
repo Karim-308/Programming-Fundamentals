@@ -2,9 +2,10 @@
 #define EMPLOYEE_H
 
 #include <stddef.h>
+#include <string>
 
 typedef struct {
-    char* name;
+    std::string name;
     double salary;
     int age;
     char gender;
