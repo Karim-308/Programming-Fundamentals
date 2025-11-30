@@ -22,11 +22,5 @@ enum MenuItem {
 };
 
 Key getKey();
-void drawMenu(MenuItem current);
-void screenNew();
-void screenDisplay();
-void screenSwap();
-void screen2D();
-void exitScreen();
 
 #endif

@@ -1,4 +1,5 @@
 #include "app.h"
+#include "screens.h"
 
 int main() {
     MenuItem currentSelection = MENU_NEW;
