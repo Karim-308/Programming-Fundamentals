@@ -1,4 +1,5 @@
 #include "string.h"
+#include <stdexcept>
 
 MyString::MyString() : data(new char[1]), len(0) {
     data[0] = '\0';
@@ -31,10 +32,16 @@ MyString& MyString::operator=(const MyString& other) {
 }
 
 char& MyString::operator[](int i) {
+    if (i < 0 || i >= len) {
+        throw std::out_of_range("MyString::operator[] index out of range");
+    }
     return data[i];
 }
 
 const char& MyString::operator[](int i) const {
+    if (i < 0 || i >= len) {
+        throw std::out_of_range("MyString::operator[] index out of range");
+    }
     return data[i];
 }
 
@@ -56,6 +63,9 @@ void MyString::copy(char* dst, const char* src) {
 }
 
 void MyString::concat(char* dst, const char* src) {
+    if (!dst || !src) {
+        throw std::invalid_argument("MyString::concat null pointer");
+    }
     int start = length(dst);
     int i = 0;
     while (src[i] != '\0') {
