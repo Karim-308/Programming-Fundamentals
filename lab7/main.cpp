@@ -15,7 +15,7 @@ int main() {
     cout << "Copy       : " << copy << '\n';
     cout << "copy real=" << copy.getReal() << " img=" << copy.getImg() << '\n';
 
-    cout << "\n using setters:\n";
+    cout << " using setters:\n";
     Complex setter;
     setter.setReal(5.5f);
     setter.setImg(-4.25f);
@@ -23,7 +23,7 @@ int main() {
     setter(7.75, 9.5);
     cout << "After operator(): " << setter << '\n';
 
-    cout << "\n using assigment operators\n";
+    cout << "using assigment operators\n";
     Complex assignSrc(1, 1);
     Complex assignB, assignC;
     assignC = assignB = assignSrc;
@@ -31,7 +31,7 @@ int main() {
     cout << "B      : " << assignB << '\n';
     cout << "C      : " << assignC << '\n';
 
-    cout << "\n overloading arthismatic operatior\n";
+    cout << "overloading arthismatic operatior\n";
     Complex arithA(2, 3);
     Complex arithB(-4, 1);
     cout << "A      : " << arithA << '\n';
@@ -41,13 +41,13 @@ int main() {
     cout << "A * B  : " << arithA * arithB << '\n';
     cout << "A / B  : " << arithA / arithB << '\n';
 
-    cout << "\n power operator\n";
+    cout << "power operator\n";
     Complex powerBase(1, 1);
     for (int p = 0; p <= 4; ++p) {
         cout << "base ^ " << p << " : " << (powerBase ^ p) << '\n';
     }
 
-    cout << "\n prefic and postfix\n";
+    cout << "prefic and postfix\n";
     Complex inc(0, 0);
     cout << "start   : " << inc << '\n';
     cout << "++inc   : " << ++inc << '\n';
@@ -59,7 +59,7 @@ int main() {
     cout << "inc-- return : " << post << '\n';
     cout << "after --     : " << inc << '\n';
 
-    cout << "\n compound operators\n";
+    cout << "compound operators\n";
     Complex left(3, -2);
     Complex right(-1, 4);
     cout << "left : " << left << " right : " << right << '\n';
@@ -74,12 +74,12 @@ int main() {
     temp = left;
     cout << "left ^= 3     : " << (temp ^= 3) << '\n';
 
-    cout << "\n unary operators\n";
+    cout << "unary operators\n";
     Complex unary(5, -7);
     cout << "+unary : " << +unary << '\n';
     cout << "-unary : " << -unary << '\n';
 
-    cout << "\n== Comparisons ==\n";
+    cout << "using Comparisons \n";
     Complex cmp1L(1, 2);
     Complex cmp1R(1, 2);
     cout << "Case 1 -> " << cmp1L << " vs " << cmp1R << '\n';
@@ -130,7 +130,7 @@ int main() {
         cout << "indexC[2] threw -> " << ex.what() << '\n';
     }
 
-    cout << "\n input and output streams\n";
+    cout << "input and output streams\n";
     Complex streamValue;
     cout << "Enter a complex number (real imag): ";
     if (cin >> streamValue) {
@@ -142,7 +142,7 @@ int main() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    cout << "\n== operator() loop ==\n";
+    cout << "operator() loop\n";
     Complex call;
     for (int i = 0; i < 3; ++i) {
         double r = i * 1.25;
@@ -151,6 +151,5 @@ int main() {
         cout << "call #" << i << " -> " << call << '\n';
     }
 
-    cout << "\nAll class features covered.\n";
     return 0;
 }
