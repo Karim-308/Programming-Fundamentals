@@ -36,7 +36,7 @@ MyStack<T>& MyStack<T>::operator=(const MyStack& other) {
 }
 
 template <typename T>
-MyStack<T>::MyStack(MyStack&& other) noexcept
+MyStack<T>::MyStack(MyStack&& other)
     : data(other.data), capacity(other.capacity), top(other.top) {
     other.data = nullptr;
     other.capacity = 0;
@@ -44,7 +44,7 @@ MyStack<T>::MyStack(MyStack&& other) noexcept
 }
 
 template <typename T>
-MyStack<T>& MyStack<T>::operator=(MyStack&& other) noexcept {
+MyStack<T>& MyStack<T>::operator=(MyStack&& other) {
     if (this == &other) {
         return *this;
     }
@@ -81,14 +81,6 @@ void MyStack<T>::push(const T& value) {
         resize();
     }
     data[++top] = value;
-}
-
-template <typename T>
-void MyStack<T>::push(T&& value) {
-    if (isFull()) {
-        resize();
-    }
-    data[++top] = std::move(value);
 }
 
 template <typename T>

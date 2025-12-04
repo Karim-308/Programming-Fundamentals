@@ -30,16 +30,16 @@ MyString& MyString::operator=(const MyString& other) {
     return *this;
 }
 
-char& MyString::operator[](std::size_t i) {
+char& MyString::operator[](int i) {
     return data[i];
 }
 
-const char& MyString::operator[](std::size_t i) const {
+const char& MyString::operator[](int i) const {
     return data[i];
 }
 
-std::size_t MyString::length(const char* s) {
-    std::size_t len = 0;
+int MyString::length(const char* s) {
+    int len = 0;
     while (s[len] != '\0') {
         len++;
     }
@@ -47,7 +47,7 @@ std::size_t MyString::length(const char* s) {
 }
 
 void MyString::copy(char* dst, const char* src) {
-    std::size_t i = 0;
+    int i = 0;
     while (src[i] != '\0') {
         dst[i] = src[i];
         i++;
@@ -56,8 +56,8 @@ void MyString::copy(char* dst, const char* src) {
 }
 
 void MyString::concat(char* dst, const char* src) {
-    std::size_t start = length(dst);
-    std::size_t i = 0;
+    int start = length(dst);
+    int i = 0;
     while (src[i] != '\0') {
         dst[start + i] = src[i];
         i++;
@@ -66,7 +66,7 @@ void MyString::concat(char* dst, const char* src) {
 }
 
 MyString& MyString::operator+=(const MyString& other) {
-    std::size_t newLen = len + other.len;
+    int newLen = len + other.len;
     char* newData = new char[newLen + 1];
 
     copy(newData, data);
@@ -89,6 +89,6 @@ const char* MyString::get() const {
     return data;
 }
 
-std::size_t MyString::size() const {
+int MyString::size() const {
     return len;
 }

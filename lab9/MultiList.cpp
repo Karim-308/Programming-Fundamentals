@@ -11,10 +11,10 @@ MultiList::~MultiList() {
 }
 
 void MultiList::grow() {
-    std::size_t new_capacity = (capacity == 0 ? 4 : capacity * 2);
+    int new_capacity = (capacity == 0 ? 4 : capacity * 2);
     std::any* new_data = new std::any[new_capacity];
 
-    for (std::size_t i = 0; i < length; ++i) {
+    for (int i = 0; i < length; ++i) {
         new_data[i] = data[i];
     }
 
@@ -31,20 +31,20 @@ void MultiList::push(const std::any& value) {
     data[length++] = value;
 }
 
-std::any& MultiList::get(std::size_t index) {
-    if (index >= length) {
+std::any& MultiList::get(int index) {
+    if (index < 0 || index >= length) {
         throw std::out_of_range("Index out of bounds");
     }
 
     return data[index];
 }
 
-std::any& MultiList::operator[](std::size_t index) {
+std::any& MultiList::operator[](int index) {
     return get(index);
 }
 
-void MultiList::insert(std::size_t index, const std::any& value) {
-    if (index > length) {
+void MultiList::insert(int index, const std::any& value) {
+    if (index < 0 || index > length) {
         throw std::out_of_range("Insert index out of bounds");
     }
 
@@ -52,7 +52,7 @@ void MultiList::insert(std::size_t index, const std::any& value) {
         grow();
     }
 
-    for (std::size_t i = length; i > index; --i) {
+    for (int i = length; i > index; --i) {
         data[i] = data[i - 1];
     }
 
@@ -68,12 +68,12 @@ std::any MultiList::pop() {
     return data[--length];
 }
 
-void MultiList::remove(std::size_t index) {
-    if (index >= length) {
+void MultiList::remove(int index) {
+    if (index < 0 || index >= length) {
         throw std::out_of_range("Remove index out of bounds");
     }
 
-    for (std::size_t i = index; i < length - 1; ++i) {
+    for (int i = index; i < length - 1; ++i) {
         data[i] = data[i + 1];
     }
 
@@ -84,13 +84,13 @@ void MultiList::clear() {
     length = 0;
 }
 
-std::size_t MultiList::size() const {
+int MultiList::size() const {
     return length;
 }
 
 void MultiList::print() const {
     std::cout << "[";
-    for (std::size_t i = 0; i < length; ++i) {
+    for (int i = 0; i < length; ++i) {
         try {
             if (data[i].type() == typeid(int)) {
                 std::cout << std::any_cast<int>(data[i]);

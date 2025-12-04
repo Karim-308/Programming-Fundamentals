@@ -1,12 +1,10 @@
 #ifndef MYSTRING_H
 #define MYSTRING_H
 
-#include <cstddef>
-
 class MyString {
 private:
     char* data;
-    std::size_t len;
+    int len;
 
 public:
     MyString();
@@ -16,10 +14,10 @@ public:
 
     MyString& operator=(const MyString& other);
 
-    char& operator[](std::size_t i);
-    const char& operator[](std::size_t i) const;
+    char& operator[](int i);
+    const char& operator[](int i) const;
 
-    static std::size_t length(const char* s);
+    static int length(const char* s);
     static void copy(char* dst, const char* src);
     static void concat(char* dst, const char* src);
 
@@ -27,7 +25,7 @@ public:
     friend MyString operator+(const MyString& a, const MyString& b);
 
     const char* get() const;
-    std::size_t size() const;
+    int size() const;
 };
 
 #endif  // MYSTRING_H

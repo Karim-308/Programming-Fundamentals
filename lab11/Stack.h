@@ -18,12 +18,11 @@ public:
     MyStack();
     MyStack(const MyStack& other);
     MyStack& operator=(const MyStack& other);
-    MyStack(MyStack&& other) noexcept;
-    MyStack& operator=(MyStack&& other) noexcept;
+    MyStack(MyStack&& other);
+    MyStack& operator=(MyStack&& other);
     ~MyStack();
 
     void push(const T& value);
-    void push(T&& value);
     T pop();
     const T& peek() const;
     bool isEmpty() const;
