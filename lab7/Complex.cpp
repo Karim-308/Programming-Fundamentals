@@ -64,7 +64,7 @@ Complex& Complex::operator--() {
 
 Complex Complex::operator++(int) {
         Complex temp(*this);
-        ++(*this);  // reuse prefix logic so postfix returns original value
+        ++(*this);
         return temp;
     }
 

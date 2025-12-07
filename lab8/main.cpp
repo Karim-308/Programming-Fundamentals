@@ -1,41 +1,52 @@
 #include "Stack.h"
 #include <iostream>
+#include <stdexcept>
+
+using namespace std;
 
 int main() {
-    MyStack s(3);
-    s.push(10);
-    s.push(20);
-    s.push(30);
-    std::cout << "Stack s: " << s << '\n';
-    std::cout << "Top element: " << s.peek() << '\n';
+    
+    MyStack stack;
 
-    std::cout << "Pop: " << s.pop() << '\n';
-    std::cout << "Pop: " << s.pop() << '\n';
-    std::cout << "Is empty? " << std::boolalpha << s.isEmpty() << '\n';
 
-    s.push(40);
-    s.push(50);
-    s.push(60);
-    s.push(70); // triggers resize, ensures growth works
-    std::cout << "After pushes/resize, s: " << s << '\n';
+   try {
+       stack.pop();
+   } catch (const std::underflow_error& e) {
+       cout <<e.what() << endl;
+   }
 
-    MyStack copy = s; // deep copy test
-    std::cout << "Original top: " << s.peek() << '\n';
-    std::cout << "Copy top: " << copy.peek() << '\n';
-    std::cout << "Copy contents: " << copy << '\n';
+    stack.push(308);
+    stack.push(2002);
+    stack.push(9798798);
+    cout << stack << endl;
 
-    s.pop();
-    std::cout << "After modifying original, copy top still: " << copy.peek() << '\n';
-    std::cout << "Original now: " << s << '\n';
-    std::cout << "Copy still: " << copy << '\n';
+   cout<< stack.peek();
+   stack.pop();
+   stack.pop();
+   stack.pop();
+   cout << stack.isEmpty() << endl;
 
-    while (!s.isEmpty()) {
-        std::cout << "Original pop: " << s.pop() << '\n';
-    }
+   try {
+       stack.pop();
+   } catch (const std::underflow_error& e) {
+       cout <<e.what() << endl;
+   }
 
-    while (!copy.isEmpty()) {
-        std::cout << "Copy pop: " << copy.pop() << '\n';
-    }
+   MyStack stack2(3);
+   stack2.push(51);
+   stack2.push(52);
+   stack2.push(53);
+
+   cout <<stack2.isFull()<<endl;
+   cout<< stack2.size()<<endl;
+   cout<< stack2.peek()<<endl;
+
+   stack= stack2;
+
+   cout<<stack<<endl;
+
+
+
 
     return 0;
 }
