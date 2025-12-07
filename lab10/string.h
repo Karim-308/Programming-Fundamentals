@@ -8,7 +8,7 @@ private:
 
 public:
     MyString();
-    explicit MyString(const char* s);
+    MyString(const char* s);
     MyString(const MyString& other);
     ~MyString();
 
@@ -17,7 +17,6 @@ public:
     char& operator[](int i);
     const char& operator[](int i) const;
 
-    static int length(const char* s);
     static void copy(char* dst, const char* src);
     static void concat(char* dst, const char* src);
 
@@ -25,7 +24,8 @@ public:
     friend MyString operator+(const MyString& a, const MyString& b);
 
     const char* get() const;
-    int size() const;
+    void remove(int index);
+    int length() const;
 };
 
 #endif  // MYSTRING_H

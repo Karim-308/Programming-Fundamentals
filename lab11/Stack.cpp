@@ -1,10 +1,9 @@
 #include <ostream>
 #include <stdexcept>
-#include <utility>
+#include "Stack.h"
 
 template <typename T>
-MyStack<T>::MyStack(int capacity)
-    : data(nullptr), capacity(capacity > 0 ? capacity : 1), top(-1) {
+MyStack<T>::MyStack(int capacity): capacity(capacity > 0 ? capacity : 1), top(-1) {
     data = new T[this->capacity];
 }
 
@@ -12,8 +11,10 @@ template <typename T>
 MyStack<T>::MyStack() : MyStack(10) {}
 
 template <typename T>
-MyStack<T>::MyStack(const MyStack& other)
-    : data(new T[other.capacity]), capacity(other.capacity), top(other.top) {
+MyStack<T>::MyStack(const MyStack& other): capacity(other.capacity), top(other.top) {
+    
+    
+    data(new T[other.capacity]);
     for (int i = 0; i <= top; ++i) {
         data[i] = other.data[i];
     }
@@ -35,28 +36,7 @@ MyStack<T>& MyStack<T>::operator=(const MyStack& other) {
     return *this;
 }
 
-template <typename T>
-MyStack<T>::MyStack(MyStack&& other)
-    : data(other.data), capacity(other.capacity), top(other.top) {
-    other.data = nullptr;
-    other.capacity = 0;
-    other.top = -1;
-}
 
-template <typename T>
-MyStack<T>& MyStack<T>::operator=(MyStack&& other) {
-    if (this == &other) {
-        return *this;
-    }
-    delete[] data;
-    data = other.data;
-    capacity = other.capacity;
-    top = other.top;
-    other.data = nullptr;
-    other.capacity = 0;
-    other.top = -1;
-    return *this;
-}
 
 template <typename T>
 MyStack<T>::~MyStack() {
@@ -65,7 +45,7 @@ MyStack<T>::~MyStack() {
 
 template <typename T>
 void MyStack<T>::resize() {
-    int newCapacity = capacity > 0 ? capacity * 2 : 1;
+    int newCapacity = capacity * 2;
     T* temp = new T[newCapacity];
     for (int i = 0; i <= top; ++i) {
         temp[i] = data[i];

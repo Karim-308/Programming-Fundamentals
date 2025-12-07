@@ -1,8 +1,6 @@
 #ifndef STACK_H
 #define STACK_H
-
-#include <ostream>
-#include <utility>
+#include <iostream>
 
 template <typename T>
 class MyStack {
@@ -14,12 +12,10 @@ private:
     void resize();
 
 public:
-    explicit MyStack(int capacity);
+    MyStack(int capacity);
     MyStack();
     MyStack(const MyStack& other);
     MyStack& operator=(const MyStack& other);
-    MyStack(MyStack&& other);
-    MyStack& operator=(MyStack&& other);
     ~MyStack();
 
     void push(const T& value);
@@ -32,7 +28,5 @@ public:
     template <typename U>
     friend std::ostream& operator<<(std::ostream& os, const MyStack<U>& stack);
 };
-
-#include "Stack.cpp"
 
 #endif
