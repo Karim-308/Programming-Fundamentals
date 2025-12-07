@@ -1,42 +1,36 @@
 #include <iostream>
 
 #include "string.h"
+using namespace std;
 
 int main() {
-    MyString empty;
-    std::cout << "Default constructor: \"" << empty.get() << "\"\n";
+    MyString string1 = "Karim Ibrahim saad";
+    cout << string1.get() << endl;
+    string1[0] = 'B';
+    cout << string1.get() << endl;
+    string1[4] = 'O';
+    cout << string1.get() << endl;
+    string1.remove(4);
+    cout << string1.get() << endl;
+    cout << string1.length() << endl;
 
-    MyString greeting("Hello");
-    std::cout << "const char* constructor: \"" << greeting.get() << "\"\n";
+    MyString string2;
+    cout << string2.length() << endl;
 
-    MyString copied(greeting);
-    std::cout << "Copy constructor: \"" << copied.get() << "\"\n";
+    string2 += "MINA CODES";
+    MyString string3 = string2 + " "+ string1;
+    cout << string3.get() << endl;
+    
+    MyString string4 = string3;
+    MyString string5(string4);
+   
+    string5[0] = 'X';
+    cout << string5.get() << endl;
+    cout << string4.get() << endl;
 
-    MyString assigned;
-    assigned = greeting;
-    std::cout << "Assignment operator: \"" << assigned.get() << "\"\n";
+    
 
-    greeting[0] = 'Y';
-    std::cout << "operator[]: \"" << greeting.get() << "\"\n";
 
-    std::cout << "length(\"Sample\") = " << MyString::length("Sample") << '\n';
-
-    char buffer[32];
-    MyString::copy(buffer, "Karim");
-    std::cout << "copy(): \"" << buffer << "\"\n";
-
-    MyString::concat(buffer, "IBrahim");
-    std::cout << "concat(): \"" << buffer << "\"\n";
-
-    MyString combined("Hello ");
-    combined += MyString("World");
-    std::cout << "operator+=: \"" << combined.get() << "\"\n";
-
-    MyString plusResult = MyString("Foo ") + MyString("Bar");
-    std::cout << "operator+: \"" << plusResult.get() << "\"\n";
-
-    std::cout << "get(): \"" << plusResult.get() << "\"\n";
-    std::cout << "size(): " << plusResult.size() << '\n';
 
     return 0;
 }

@@ -6,7 +6,9 @@ MyString::MyString() : data(new char[1]), len(0) {
 }
 
 MyString::MyString(const char* s) : data(nullptr), len(0) {
-    len = length(s);
+    while (s[len] != '\0') {
+        ++len;
+    }
     data = new char[len + 1];
     copy(data, s);
 }
@@ -45,14 +47,6 @@ const char& MyString::operator[](int i) const {
     return data[i];
 }
 
-int MyString::length(const char* s) {
-    int len = 0;
-    while (s[len] != '\0') {
-        len++;
-    }
-    return len;
-}
-
 void MyString::copy(char* dst, const char* src) {
     int i = 0;
     while (src[i] != '\0') {
@@ -66,7 +60,10 @@ void MyString::concat(char* dst, const char* src) {
     if (!dst || !src) {
         throw std::invalid_argument("MyString::concat null pointer");
     }
-    int start = length(dst);
+    int start = 0;
+    while (dst[start] != '\0') {
+        ++start;
+    }
     int i = 0;
     while (src[i] != '\0') {
         dst[start + i] = src[i];
@@ -99,6 +96,15 @@ const char* MyString::get() const {
     return data;
 }
 
-int MyString::size() const {
+int MyString::length() const {
     return len;
+}
+
+void MyString::remove(int index) {
+    if (index < 0 || index >= len) {
+        throw std::out_of_range("MyString::remove index out of range");
+    }
+    
+    copy(data + index, data + index + 1);
+    --len;
 }
