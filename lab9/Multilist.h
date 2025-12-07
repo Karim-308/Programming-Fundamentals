@@ -22,6 +22,7 @@ public:
     Value& operator[] (int index);
     void display() const;
     friend ostream& operator<<(ostream& os, const Multilist& ml);
+    int getSize();
     
     ~Multilist();
 };

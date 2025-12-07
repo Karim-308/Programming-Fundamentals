@@ -13,6 +13,11 @@ private:
 public:
      Value();
      Value(string s);
+     Value(const char* s);
+     Value(int n);
+     Value(bool b);
+     Value(double d);
+     Value(char c);
      string getData();
     ~ Value();
     friend ostream& operator<< (ostream& os , const Value& val);

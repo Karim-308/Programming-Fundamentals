@@ -24,7 +24,7 @@ int main() {
     cout<< typeid(val1).name() << endl;
     cout<< val1.getType() << endl;
 
-    Value val4("1234.648484668465465");
+    Value val4("1234.6484846684654655551151651665");
     string type = val4.getType();
     if (type == "int") {
         cout << "integer" << endl;
@@ -60,6 +60,18 @@ int main() {
 
     cout << "Full list: " << mylist << endl;
 
+    Multilist mylist2;
+    mylist2[0]= 84;
+    mylist2[1]= true;
+    mylist2[2] = 6666.99;
+    mylist2[4] = 'S';
+    mylist2[5] =  "LOlo";
+    string val5 = "Mina";
+    mylist2[6] =val5;
+    cout<< mylist2<<endl;
+
+    for (int i = 0 ; i<mylist2.getSize() ;i++)
+    cout<<mylist2[i].getType()<<endl;
 
     delete val2;
     return 0;

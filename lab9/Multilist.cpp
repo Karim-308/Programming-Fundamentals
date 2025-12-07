@@ -71,8 +71,17 @@ void Multilist ::removeAt(int index) {
     size--;
 }
 Value& Multilist ::operator[] (int index) {
-    if (index < 0 || index >= size) {
+    if (index < 0) {
         throw out_of_range("Index out of range");
+    }
+    while (index >= capacity) {
+        resize();
+    }
+    if (index >= size) {
+        for (int i = size; i <= index; ++i) {
+            arr[i] = Value();
+        }
+        size = index + 1;
     }
     return arr[index];
 }
@@ -96,4 +105,9 @@ ostream& operator<<(ostream& os, const Multilist& ml) {
 Multilist::~Multilist()
 {
     delete[] arr;
+}
+
+int Multilist::getSize()
+{
+    return size;
 }

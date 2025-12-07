@@ -3,8 +3,13 @@
 #include <cstdlib>
 #include <stdexcept>
  
- Value:: Value() : data("") {};
+Value:: Value() : data("") {};
     Value:: Value(string s) : data(s) {};
+    Value:: Value(const char* s) : data(string(s) ) {};
+    Value:: Value(int n) : data(to_string(n)) {};
+    Value:: Value(bool b) : data(b ? "true" : "false") {};
+    Value:: Value(double d) : data(to_string(d)) {};
+    Value:: Value(char c) : data(1, c) {};
  Value::~ Value (){};
  string Value::getData() {
      return data;
@@ -32,10 +37,8 @@
         if (data.empty()) return false;
         size_t idx = 0;
         try {
-            stol(data, &idx);
-        } catch (const invalid_argument&) {
-            return false;
-        } catch (const out_of_range&) {
+            stoi(data, &idx);
+        } catch (...){
             return false;
         }
         return idx == data.size();
@@ -43,24 +46,30 @@
     bool Value::isFloat() {
         if (data.empty()) return false;
         size_t idx = 0;
+        double doubleVersion;
         try {
-            stof(data, &idx);
-        } catch (const invalid_argument&) {
-            return false;
-        } catch (const out_of_range&) {
+            doubleVersion = stod(data, &idx);
+        } catch (...){
             return false;
         }
-        return idx == data.size();
+        if (idx != data.size()) return false;
+
+        float floatVersion = static_cast<float>(doubleVersion);
+        return static_cast<double>(floatVersion) == doubleVersion;
     }
     bool Value::isDouble() {
-    char* endOfNumber;
-        double doubleVersion = strtod(data.c_str(), &endOfNumber);
-       if (*endOfNumber != '\0') return false;
+        if (data.empty()) return false;
+        size_t idx = 0;
+        double doubleVersion;
+        try {
+            doubleVersion = stod(data, &idx);
+        }  catch (...){
+            return false;
+        }
+        if (idx != data.size()) return false;
 
-         float floatVersion = strtof(data.c_str(), nullptr);
-        
+        float floatVersion = static_cast<float>(doubleVersion);
         return static_cast<double>(floatVersion) != doubleVersion;
-
     }
     bool Value::isChar() {
         return data.length() == 1;
