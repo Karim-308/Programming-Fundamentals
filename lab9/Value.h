@@ -12,8 +12,8 @@ private:
 
 public:
      Value();
-     Value(string s);
      Value(const char* s);
+     Value(const string &s);
      Value(int n);
      Value(bool b);
      Value(double d);

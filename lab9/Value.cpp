@@ -4,8 +4,8 @@
 #include <stdexcept>
  
 Value:: Value() : data("") {};
-    Value:: Value(string s) : data(s) {};
-    Value:: Value(const char* s) : data(string(s) ) {};
+    Value:: Value(const char* s) : data(s) {};
+    Value:: Value(const string &s) : data(s) {};
     Value:: Value(int n) : data(to_string(n)) {};
     Value:: Value(bool b) : data(b ? "true" : "false") {};
     Value:: Value(double d) : data(to_string(d)) {};

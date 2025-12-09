@@ -47,7 +47,9 @@ int main() {
     mylist.push("777777777");
     mylist.push(val1.getData());
     mylist.push("45.67");
-    mylist.push("A");
+    mylist.push("P");
+    mylist.push(val2);
+
     
     mylist.insertAt(2, val2->getData());
     mylist.removeAt(4);

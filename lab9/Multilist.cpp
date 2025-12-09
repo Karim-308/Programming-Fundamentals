@@ -12,16 +12,16 @@ Multilist::Multilist(int cap) : size(0), capacity(cap) {
     arr = new Value[capacity];
 }
 
-void Multilist :: push (string v) {
+/*void Multilist :: push (string v) {
     if (size >= capacity) {
         resize();
     }
     arr[size] = Value(v);
     size++;
 }
+*/
 
-
-void Multilist :: push (Value& v) {
+void Multilist :: push ( Value v) {
     if (size >= capacity) {
         resize();
     }

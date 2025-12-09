@@ -14,8 +14,8 @@ private:
 public:
     Multilist();
     Multilist(int cap);
-    void push(string v);
-    void push(Value& v);
+    //void push(string v);
+    void push(Value v);
     Value pop();
     void insertAt(int index, string v);
     void removeAt(int index);
