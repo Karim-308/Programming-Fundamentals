@@ -37,7 +37,6 @@ int main() {
    }
 
 
-
     Complex powerComplex(2, 2);
     cout << powerComplex<<endl;
     cout << (powerComplex ^ 3)<<endl;
@@ -54,21 +53,21 @@ int main() {
 
     Complex left(3, -2);
     Complex right(-1, 4);
-    cout << "AA : " << left << " BB : " << right << endl;
+    cout << "Left : " << left << " right : " << right << endl;
     Complex temp = left;
-    cout << "AA += BB : " << (temp += right) << endl;
+    cout << "Left += right : " << (temp += right) << endl;
     temp = left;
-    cout << "AA -= BB : " <<  (temp -= right) << endl;
+    cout << "Left -= right : " <<  (temp -= right) << endl;
     temp = left;
-    cout << "AA *= BB : " <<  (temp *= right) << endl;
+    cout << "Left *= right : " <<  (temp *= right) << endl;
     temp = left;
-    cout << "AA /= BB : " <<  (temp /= right) << endl;
+    cout << "Left /= right : " <<  (temp /= right) << endl;
     temp = left;
-    cout << "AA += BB : " <<  (temp ^= 3) << endl;
+    cout << "Left += right : " <<  (temp ^= 3) << endl;
 
     try
     {
-        cout << "AA /= BB : " <<  (temp /= zeroCom) << endl;
+        cout << "Left /= right : " <<  (temp /= zeroCom) << endl;
     }
     catch(const std::exception& e)
     {
@@ -76,17 +75,17 @@ int main() {
     }
     
 
-    Complex cmp1L(1, 2);
-    Complex cmp1R(1, 0);
+    Complex left2(1, 2);
+    Complex right2(1, 0);
 
-    if (cmp1L>cmp1R){
-        cout<<cmp1L << " is bigger than " << cmp1R<< endl;
+    if (left2>right2){
+        cout<<left2 << " is bigger than " << right2<< endl;
     }
-    else if (cmp1L<cmp1R){
-        cout<<cmp1R << " is bigger than " << cmp1L <<endl;
+    else if (left2<right2){
+        cout<<right2 << " is bigger than " << left2 <<endl;
     }
     else
-     cout<<cmp1L << " is equal to " << cmp1R<<endl;
+     cout<<left2 << " is equal to " << right2<<endl;
 
 
     Complex complexWithParantethis;
