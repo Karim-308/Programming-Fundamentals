@@ -35,7 +35,7 @@ int main() {
    }
 
 
-   stack2.push(3.14f);
+   stack2.push(5.1555f);
    stack2.push(2.71f);
    cout << stack2 << endl;
 
