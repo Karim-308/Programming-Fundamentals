@@ -1,31 +1,36 @@
 #ifndef MYSTRING_H
 #define MYSTRING_H
+#include <ostream>
+using namespace std;
 
-class MyString {
+class MyString
+{
 private:
-    char* data;
+    char *data;
     int len;
 
 public:
     MyString();
-    MyString(const char* s);
-    MyString(const MyString& other);
+    MyString(const char *s);
+    MyString(const MyString &other);
     ~MyString();
 
-    MyString& operator=(const MyString& other);
+    MyString &operator=(const MyString &other);
 
-    char& operator[](int i);
-    const char& operator[](int i) const;
+    char &operator[](int i);
+    const char &operator[](int i) const;
 
-    static void copy(char* dst, const char* src);
-    static void concat(char* dst, const char* src);
+    static void copy(char *dst, const char *src);
+    static void concat(char *dst, const char *src);
 
-    MyString& operator+=(const MyString& other);
-    friend MyString operator+(const MyString& a, const MyString& b);
+    MyString &operator+=(const MyString &other);
+    friend MyString operator+(const MyString &a, const MyString &b);
 
-    const char* get() const;
+    const char *get() const;
     void remove(int index);
     int length() const;
+
+    friend ostream& operator<<(ostream &stream, const MyString &str);
 };
 
-#endif  // MYSTRING_H
+#endif // MYSTRING_H

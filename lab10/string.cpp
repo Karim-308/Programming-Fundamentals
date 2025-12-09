@@ -1,6 +1,7 @@
 #include "string.h"
 #include <stdexcept>
-
+#include <ostream>
+using namespace std;
 MyString::MyString() : data(new char[1]), len(0) {
     data[0] = '\0';
 }
@@ -108,3 +109,10 @@ void MyString::remove(int index) {
     copy(data + index, data + index + 1);
     --len;
 }
+
+ostream&  operator<<(ostream &os, const MyString &str)
+    {
+    
+        os<< str.get();
+        return os;
+    }
